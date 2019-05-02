@@ -103,5 +103,28 @@ namespace Copa.WebApi.Controllers
 
             return BadRequest();
         }
+
+        [HttpDelete("{SelecaoId}")]
+        public async Task<IActionResult> Delete(int SelecaoId)
+        {
+            try
+            {
+                var selecao = await _repo.GetAllSelecaoAssyncById(SelecaoId);
+                if(selecao == null) return NotFound();
+                
+                _repo.Delete(selecao);
+                
+                if(await _repo.SaveChangesAssync())
+                {
+                    return Ok();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+            return BadRequest();
+        }
     }
 }

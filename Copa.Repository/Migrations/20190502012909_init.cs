@@ -28,10 +28,10 @@ namespace Copa.Repository.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Selecao1Id = table.Column<int>(nullable: true),
-                    Selecao2Id = table.Column<int>(nullable: true),
+                    Selecao1Id = table.Column<int>(nullable: false),
+                    Selecao2Id = table.Column<int>(nullable: false),
                     DataConfronto = table.Column<DateTime>(nullable: false),
-                    QtqGols1 = table.Column<int>(nullable: true),
+                    QtdGols1 = table.Column<int>(nullable: true),
                     QtdGols2 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -42,13 +42,13 @@ namespace Copa.Repository.Migrations
                         column: x => x.Selecao1Id,
                         principalTable: "Selecoes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Chaves_Selecoes_Selecao2Id",
                         column: x => x.Selecao2Id,
                         principalTable: "Selecoes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Copa.Repository.Migrations
 {
     [DbContext(typeof(CopaContext))]
-    [Migration("20190501144958_init")]
+    [Migration("20190502012909_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,13 @@ namespace Copa.Repository.Migrations
 
                     b.Property<DateTime>("DataConfronto");
 
+                    b.Property<int?>("QtdGols1");
+
                     b.Property<int?>("QtdGols2");
 
-                    b.Property<int?>("QtqGols1");
+                    b.Property<int>("Selecao1Id");
 
-                    b.Property<int?>("Selecao1Id");
-
-                    b.Property<int?>("Selecao2Id");
+                    b.Property<int>("Selecao2Id");
 
                     b.HasKey("Id");
 
@@ -62,11 +62,13 @@ namespace Copa.Repository.Migrations
                 {
                     b.HasOne("Copa.Domain.Selecao", "Selecao1")
                         .WithMany()
-                        .HasForeignKey("Selecao1Id");
+                        .HasForeignKey("Selecao1Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Copa.Domain.Selecao", "Selecao2")
                         .WithMany()
-                        .HasForeignKey("Selecao2Id");
+                        .HasForeignKey("Selecao2Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

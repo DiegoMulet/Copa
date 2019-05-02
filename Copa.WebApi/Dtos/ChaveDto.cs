@@ -7,18 +7,14 @@ namespace Copa.WebApi.Dtos
         public int Id { get; set; }
         
         [Required]
-        public SelecaoDto Selecao1 { get; set; }
+        public int Selecao1Id { get; set; }
         
         [Required]
-        public SelecaoDto Selecao2 { get; set; }
+        public int Selecao2Id { get; set; }
         
         [Required]
-        public string DataConfronto { get; set; }
-        
-        [MaxLength(20)]
-        public int? QtqGols1 { get; set; }
-        
-        [MaxLength(20)]
+        public string DataConfronto { get; set; }        
+        public int? QtdGols1 { get; set; }
         public int? QtdGols2 { get; set; }
     }
 }

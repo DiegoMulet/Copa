@@ -36,12 +36,10 @@ namespace Copa.Repository
 
         public async Task<Chave[]> GetAllChaveAssync(bool notIncludeFinalizada)
         {
-            IQueryable<Chave> query = _context.Chaves
-                .Include(s => s.Selecao1)
-                .Include(s => s.Selecao2);
+            IQueryable<Chave> query = _context.Chaves;
 
                 if(notIncludeFinalizada)
-                    query = query.Where(c =>c.QtqGols1 == int.MinValue && c.QtdGols2 == int.MinValue);
+                    query = query.Where(c =>c.QtdGols1 == int.MinValue && c.QtdGols2 == int.MinValue);
 
                 query = query.OrderBy(c => c.DataConfronto);
 
@@ -50,9 +48,7 @@ namespace Copa.Repository
 
         public async Task<Chave> GetAllChaveAssyncById(int id)
         {
-            IQueryable<Chave> query = _context.Chaves
-                .Include(s => s.Selecao1)
-                .Include(s => s.Selecao2);
+            IQueryable<Chave> query = _context.Chaves;
 
             return await query.FirstOrDefaultAsync(c => c.Id == id);
 
